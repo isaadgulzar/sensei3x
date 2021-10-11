@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/tailwind.css">
+    <link rel="stylesheet" href="./static/dist/tailwind.css">
+    <title>Create New Assesment - Super Admin</title>
+</head>
+<body>
+    <div x-data="{SelectQuestionModal : false,sidebar : false}" class="relative bg-white-lilac">
+        <div class="relative z-10 flex flex-col lg:flex-row px-3 md:px-5 min-h-full pt-6 pb-10 font-source-sans-pro">
+            <div class="bg-gradient-to-r from-purple to-blue w-full fixed top-0 left-0 z-30 py-4 px-3 flex lg:hidden items-center justify-center">
+                <button @click="sidebar = !sidebar" class="absolute left-3 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                <h2 class="text-white text-3xl font-bold">Sensei3x</h2>
+            </div>
+            <div x-show="sidebar" class="lg:hidden fixed z-40 top-0 left-0 bg-white bg-opacity-70 flex h-screen w-full"></div>
+            <div :class="{'flex lg:hidden absolute z-50 h-screen top-2 left-0' : sidebar, 'hidden lg:flex' : !sidebar}" class="lg:relative flex-col lg:min-h-full w-56 rounded-3xl rounded-tr-6xl bg-gradient-to-b from-purple to-blue">
+                <h2 class="text-white text-3xl font-bold pl-7 pt-10">Sensei3x</h2>
+                <ul class="flex flex-col space-y-5 sidebar-nav pt-10 pr-7">
+                    <li>
+                        <a href="#">
+                            <svg class="fill-current" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.25 15H2.42188V7.5H0L8.125 0L16.25 7.5H13.8281V15H10V10H6.25V15Z"/>
+                            </svg>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="">
+                            <svg class="fill-current" width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3828 9.58595C12.9297 9.79428 13.3659 10.1263 13.6914 10.582C14.0169 11.0378 14.1797 11.5521 14.1797 12.125H3.32031C3.32031 11.1875 3.67187 10.4714 4.375 9.97657C4.63542 9.79428 5.27343 9.58595 6.28906 9.35157C6.91407 9.27345 7.2526 9.10418 7.30469 8.84376C7.33073 8.73959 7.34375 8.44012 7.34375 7.94532C7.34375 7.8672 7.31771 7.80209 7.26562 7.75001C7.16146 7.64584 7.05729 7.46355 6.95312 7.20314C6.90104 6.9948 6.84896 6.6823 6.79688 6.26564C6.69271 6.29168 6.60807 6.25262 6.54297 6.14845C6.47786 6.04428 6.42578 5.90756 6.38672 5.73829L6.3375 5.51095L6.28798 5.18382C6.24096 4.78958 6.2934 4.60331 6.44531 4.62501C6.36719 4.52084 6.30208 4.27345 6.25 3.88282C6.17187 3.3099 6.21094 2.8021 6.36719 2.35939C6.54948 1.86459 6.875 1.48699 7.34375 1.22657C7.8125 0.966156 8.32031 0.848969 8.86719 0.875011C9.38802 0.901053 9.86328 1.0573 10.293 1.34376C10.7227 1.63022 11.0156 2.02084 11.1719 2.51564C11.3021 2.88022 11.3151 3.38803 11.2109 4.03907L11.1663 4.27823C11.1291 4.45361 11.0919 4.56921 11.0547 4.62501C11.1328 4.59897 11.1914 4.62501 11.2305 4.70314C11.2695 4.78126 11.2826 4.87892 11.2695 4.9961L11.2305 5.3086C11.2174 5.39975 11.1979 5.47136 11.1719 5.52345L11.0938 5.79689C11.0677 5.97918 11.0221 6.10939 10.957 6.18751C10.8919 6.26564 10.8073 6.29168 10.7031 6.26564C10.651 6.83856 10.5599 7.2422 10.4297 7.47657C10.4297 7.49741 10.4005 7.54324 10.3422 7.61407L10.293 7.67189C10.2018 7.77605 10.1562 7.84116 10.1562 7.8672V8.29689C10.1562 8.5573 10.1823 8.75261 10.2344 8.88282C10.2865 9.01303 10.4687 9.1172 10.7812 9.19532C10.9271 9.25782 11.1271 9.31199 11.3812 9.35782L11.582 9.39064C11.9336 9.44272 12.2005 9.50782 12.3828 9.58595ZM4.20461 9.15626C3.89576 9.34752 3.62703 9.56887 3.39844 9.82032C3.26823 10.1068 3.17708 10.25 3.125 10.25H0C0 9.46876 0.390621 8.94793 1.17188 8.68751L1.2283 8.67883C1.28617 8.66726 1.38455 8.64411 1.52344 8.60939C1.73177 8.5573 1.91406 8.50522 2.07031 8.45314C2.22656 8.40105 2.31771 8.33595 2.34375 8.25782C2.36979 8.1797 2.38281 7.97137 2.38281 7.63282C1.86198 7.68491 1.44531 7.59376 1.13281 7.35939L1.28906 6.89064C1.3151 6.83855 1.34115 6.76694 1.36719 6.67579C1.38455 6.61503 1.39612 6.56295 1.40191 6.51954L1.42538 6.22817C1.43601 6.05172 1.44239 5.83276 1.44452 5.57128L1.44531 5.3672C1.44531 4.40365 1.54948 3.76564 1.75781 3.45314C2.04427 2.98438 2.53906 2.75001 3.24219 2.75001C4.24709 2.75001 4.8483 3.17677 5.04582 4.03029L5.07812 4.19532C5.13021 4.4297 5.15625 4.77475 5.15625 5.23048V6.07032C5.15625 6.35678 5.22135 6.66928 5.35156 7.00782C5.45573 7.21616 5.49479 7.33334 5.46875 7.35939L5.23438 7.47657C5.10417 7.52866 4.88281 7.58074 4.57031 7.63282C4.36198 7.63282 4.24479 7.64584 4.21875 7.67189V8.10157C4.21875 8.25782 4.28385 8.34897 4.41406 8.37501C4.4401 8.38803 4.47754 8.40105 4.52637 8.41407L4.70703 8.45314C4.85026 8.47918 4.97396 8.51173 5.07812 8.55079C5.18229 8.58986 5.26042 8.63543 5.3125 8.68751C5.39063 8.81772 5.36458 8.88282 5.23438 8.88282C4.86979 8.93491 4.59635 9.00001 4.41406 9.07814H4.375L4.3004 9.10798L4.33594 9.07814L4.25204 9.12732L4.17969 9.15626H4.20461ZM17.5 10.25C17.5 9.46876 17.0964 8.94793 16.2891 8.68751C16.2109 8.66147 16.0872 8.63543 15.918 8.60939C15.7487 8.58334 15.599 8.54428 15.4688 8.4922C15.3385 8.44011 15.2344 8.37501 15.1562 8.29689C15.1367 8.27735 15.1245 8.14796 15.1196 7.9087L15.1172 7.63282C15.3516 7.63282 15.5208 7.6198 15.625 7.59376L16.0938 7.47657C16.1198 7.45053 16.1589 7.43751 16.2109 7.43751L16.2587 7.43317C16.2876 7.42738 16.3108 7.41581 16.3281 7.39845C16.4062 7.37241 16.4062 7.29428 16.3281 7.16407C16.224 7.00782 16.1458 6.81251 16.0938 6.57814C16.0417 6.34376 16.0156 6.14845 16.0156 5.9922C16.0156 5.9297 16.0167 5.85678 16.0188 5.77345L16.0541 4.80188L16.0493 4.53929C16.0095 3.81518 15.7509 3.30991 15.2734 3.02345C14.6745 2.68491 14.0495 2.64584 13.3984 2.90626C12.7474 3.16668 12.3958 3.8698 12.3438 5.01564C12.2917 6.16148 12.2266 6.82553 12.1484 7.00782L12.1102 7.10269C12.0464 7.28126 12.0592 7.39287 12.1484 7.43751C12.1918 7.45487 12.2367 7.47223 12.283 7.48959L12.5781 7.59376C12.8906 7.64584 13.125 7.67189 13.2812 7.67189V8.21876C13.2552 8.29689 13.0469 8.38803 12.6562 8.4922L12.5407 8.52568C12.3238 8.59265 12.1931 8.65961 12.1484 8.72657C12.1224 8.8047 12.1419 8.85678 12.207 8.88282C12.2721 8.90886 12.3568 8.92189 12.4609 8.92189H12.6562C12.9427 8.97397 13.3073 9.16928 13.75 9.50782C14.1146 9.82032 14.3229 10.0677 14.375 10.25H17.5Z"/>
+                            </svg>
+                            <span>OrganizationList</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="">
+                            <svg class="fill-current" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.32 3.82H8.99999V0.5H0.679993V15.5H17.32V3.82ZM3.99999 2.18V3.82H2.31999V2.18H3.99999ZM7.31999 2.18V3.82H5.67999V2.18H7.31999ZM15.68 13.82V5.5H8.99999V7.18H10.68V8.82H8.99999V10.5H10.68V12.18H8.99999V13.82H15.68ZM14 8.82V7.18H12.32V8.82H14ZM14 12.18V10.5H12.32V12.18H14ZM7.31999 7.18V5.5H5.67999V7.18H7.31999ZM7.31999 8.82V10.5H5.67999V8.82H7.31999ZM7.31999 13.82V12.18H5.67999V13.82H7.31999ZM3.99999 7.18V5.5H2.31999V7.18H3.99999ZM3.99999 8.82V10.5H2.31999V8.82H3.99999ZM3.99999 13.82V12.18H2.31999V13.82H3.99999Z"/>
+                            </svg>
+                            <span>Room List</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="">
+                            <svg class="fill-current" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.38281 2.75781C3.97136 1.16926 5.88541 0.375 8.125 0.375C10.3646 0.375 12.2786 1.16926 13.8672 2.75781C15.4557 4.34636 16.25 6.26041 16.25 8.5C16.25 10.7396 15.4557 12.6536 13.8672 14.2422C12.2786 15.8307 10.3646 16.625 8.125 16.625C5.88541 16.625 3.97136 15.8307 2.38281 14.2422C0.794263 12.6536 0 10.7396 0 8.5C0 6.26041 0.794263 4.34636 2.38281 2.75781ZM7.8125 12.6016C7.94271 12.7318 8.09896 12.7969 8.28125 12.7969C8.46354 12.7969 8.61979 12.7318 8.75 12.6016C8.88021 12.4714 8.94531 12.3151 8.94531 12.1328C8.94531 11.9505 8.88021 11.7943 8.75 11.6641C8.61979 11.5339 8.46354 11.4688 8.28125 11.4688C8.09896 11.4688 7.94271 11.5339 7.8125 11.6641C7.68229 11.7943 7.61719 11.9505 7.61719 12.1328C7.61719 12.3151 7.68229 12.4714 7.8125 12.6016ZM9.35625 8.53594L9.60938 8.30469C10.2865 7.67968 10.625 7.01563 10.625 6.3125C10.625 5.66146 10.4036 5.14714 9.96094 4.76953C9.51823 4.39193 8.95834 4.20312 8.28125 4.20312C6.51041 4.20312 5.625 5.01041 5.625 6.625H6.36719C6.34115 6.05208 6.49088 5.60938 6.81641 5.29688C7.14193 4.98437 7.61718 4.82812 8.24219 4.82812C8.71094 4.82812 9.10156 4.96484 9.41406 5.23828C9.72656 5.51172 9.88281 5.88281 9.88281 6.35156C9.88281 6.92448 9.63542 7.43229 9.14062 7.875L8.97282 8.03402C8.32747 8.68122 7.99279 9.46153 7.96875 10.375H8.71094C8.7221 10.2299 8.73087 10.1075 8.73724 10.0079L8.75313 9.66953C8.76146 9.57995 8.78646 9.45703 8.82812 9.30078C8.88021 9.10547 8.96484 8.94271 9.08203 8.8125C9.15234 8.73438 9.24375 8.64219 9.35625 8.53594Z"/>
+                            </svg>
+                             <span>Question</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="active">
+                            <svg class="fill-current" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.3984 6.64844C13.6328 6.41406 13.75 6.11458 13.75 5.75V2C13.75 1.63541 13.6328 1.33594 13.3984 1.10156C13.1641 0.867186 12.8646 0.75 12.5 0.75C12.1354 0.75 11.8359 0.867186 11.6016 1.10156C11.3672 1.33594 11.25 1.63541 11.25 2V5.75C11.25 6.11458 11.3672 6.41406 11.6016 6.64844C11.8359 6.88281 12.1354 7 12.5 7C12.8646 7 13.1641 6.88281 13.3984 6.64844ZM0 3.25V4.5H10.625V3.25H0ZM6.25 11.375C6.25 11.7396 6.13281 12.0391 5.89844 12.2734C5.66406 12.5078 5.36458 12.625 5 12.625C4.63542 12.625 4.33594 12.5078 4.10156 12.2734C3.86719 12.0391 3.75 11.7396 3.75 11.375V7.625C3.75 7.26042 3.86719 6.96094 4.10156 6.72656C4.33594 6.49219 4.63542 6.375 5 6.375C5.36458 6.375 5.66406 6.49219 5.89844 6.72656C6.13281 6.96094 6.25 7.26042 6.25 7.625V11.375ZM0 10.125V8.875H3.125V10.125H0ZM13.3984 17.8984C13.6328 17.6641 13.75 17.3646 13.75 17V13.25C13.75 12.8854 13.6328 12.5859 13.3984 12.3516C13.1641 12.1172 12.8646 12 12.5 12C12.1354 12 11.8359 12.1172 11.6016 12.3516C11.3672 12.5859 11.25 12.8854 11.25 13.25V17C11.25 17.3646 11.3672 17.6641 11.6016 17.8984C11.8359 18.1328 12.1354 18.25 12.5 18.25C12.8646 18.25 13.1641 18.1328 13.3984 17.8984ZM0 15.75V14.5H10.625V15.75H0ZM14.375 15.75V14.5H17.5V15.75H14.375ZM6.875 8.875V10.125H17.5V8.875H6.875ZM14.375 4.5V3.25H17.5V4.5H14.375Z"/>
+                            </svg>
+                            <span>Assesment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="">
+                            <svg class="fill-current" width="14" height="19" viewBox="0 0 14 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.125 5.75C3.20313 4.89062 3.56771 4.36979 4.21875 4.1875L4.25781 4.14844C4.80469 4.01823 5.07812 3.75781 5.07812 3.36719V2.54688C5.07812 2.05208 5.2539 1.62891 5.60547 1.27734C5.95703 0.925779 6.38021 0.75 6.875 0.75C7.36979 0.75 7.79297 0.925779 8.14453 1.27734C8.4961 1.62891 8.67188 2.05208 8.67188 2.54688V3.36719C8.67188 3.78386 8.94531 4.05729 9.49219 4.1875H9.57031C10.1953 4.36979 10.5469 4.89062 10.625 5.75H3.125ZM6.875 2C6.53646 2 6.36719 2.18229 6.36719 2.54688C6.36719 2.91146 6.53646 3.09375 6.875 3.09375C7.23958 3.09375 7.42188 2.91146 7.42188 2.54688C7.42188 2.18229 7.23958 2 6.875 2ZM13.4375 2.3125C13.2292 2.10417 12.9818 2 12.6953 2H9.80469V2.50781C9.80469 2.71615 9.88281 2.89193 10.0391 3.03516C10.1953 3.17839 10.3776 3.25 10.5859 3.25H12.0312C12.3438 3.25 12.5 3.41927 12.5 3.75781V16.5312C12.5 16.8438 12.3568 17 12.0703 17H1.71875C1.43229 17 1.28906 16.8438 1.28906 16.5312V3.75781C1.28906 3.41927 1.44531 3.25 1.75781 3.25H3.20312C3.41146 3.25 3.58724 3.17839 3.73047 3.03516C3.8737 2.89193 3.94531 2.71615 3.94531 2.50781V2H1.09375C0.80729 2 0.553387 2.10417 0.332031 2.3125C0.110676 2.52083 0 2.78125 0 3.09375V17.1562C0 17.4688 0.110676 17.7292 0.332031 17.9375C0.553387 18.1458 0.80729 18.25 1.09375 18.25H12.6953C12.9818 18.25 13.2292 18.1458 13.4375 17.9375C13.6458 17.7292 13.75 17.4688 13.75 17.1562V3.09375C13.75 2.78125 13.6458 2.52083 13.4375 2.3125ZM2.5 8.25V7H6.875V8.25H2.5ZM2.5 14.5V15.75H8.75V14.5H2.5ZM2.5 13.25V12H7.53906V13.25H2.5ZM2.5 9.5V10.75H10.625V9.5H2.5Z"/>
+                            </svg>
+                            <span>Mission</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="">
+                            <svg class="fill-current" width="20" height="13" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.25H20V10.25H0V0.25ZM7.53906 9C6.67968 8.01041 6.25 6.76042 6.25 5.25C6.25 3.73958 6.67968 2.48959 7.53906 1.5H3.75C3.75 2.17709 3.50261 2.76302 3.00781 3.25781C2.51302 3.75261 1.92709 4 1.25 4V7.125C1.77084 7.125 2.21354 7.30729 2.57812 7.67188C2.94271 8.03646 3.125 8.47916 3.125 9H7.53906ZM11.7969 6.10938C11.7969 6.36979 11.7448 6.5651 11.6406 6.69531C11.4844 6.90365 11.3542 7.04687 11.25 7.125C11.1458 7.20313 10.9635 7.26823 10.7031 7.32031C10.5469 7.3724 10.4297 7.39844 10.3516 7.39844V7.75H9.64844V7.39844C9.61719 7.39844 9.56719 7.38906 9.49844 7.37031L9.33594 7.32031C9.15364 7.29427 8.95833 7.20313 8.75 7.04688C8.59375 6.91667 8.46354 6.77344 8.35938 6.61719C8.25521 6.35677 8.20312 6.14844 8.20312 5.99219H8.98438C8.98438 6.07031 9.01042 6.1875 9.0625 6.34375C9.08854 6.44792 9.16667 6.53906 9.29688 6.61719C9.375 6.66927 9.49219 6.72135 9.64844 6.77344V5.40625H9.49219C9.41406 5.40625 9.36198 5.39323 9.33594 5.36719C9.17969 5.34115 9.02344 5.27604 8.86719 5.17188C8.78906 5.11979 8.6849 5.02865 8.55469 4.89844C8.47656 4.84635 8.42448 4.75521 8.39844 4.625L8.37674 4.53819C8.36516 4.47454 8.35938 4.39931 8.35938 4.3125C8.35938 4.15625 8.41146 3.97396 8.51562 3.76562C8.59375 3.63542 8.71094 3.50521 8.86719 3.375C8.97135 3.29687 9.15364 3.23177 9.41406 3.17969C9.51823 3.1276 9.59635 3.10156 9.64844 3.10156V2.75H10.3516V3.10156C10.4297 3.10156 10.5208 3.1276 10.625 3.17969C10.8333 3.23177 11.0156 3.3099 11.1719 3.41406C11.3281 3.51823 11.4453 3.66146 11.5234 3.84375C11.6276 4.05208 11.6797 4.22135 11.6797 4.35156H10.8984C10.8724 4.11719 10.7813 3.94792 10.625 3.84375C10.599 3.84375 10.5534 3.83073 10.4883 3.80469C10.4232 3.77865 10.3776 3.7526 10.3516 3.72656V4.9375H10.5078C10.5859 4.9375 10.638 4.95052 10.6641 4.97656C10.8203 5.02865 10.9115 5.05469 10.9375 5.05469C11.0417 5.08073 11.1719 5.14583 11.3281 5.25C11.4062 5.30208 11.4974 5.38021 11.6016 5.48438C11.6536 5.53646 11.7057 5.64062 11.7578 5.79688C11.7839 5.875 11.7969 5.97917 11.7969 6.10938ZM18.75 7.125V4C18.0729 4 17.487 3.75261 16.9922 3.25781C16.4974 2.76302 16.25 2.17709 16.25 1.5H12.4609C13.3203 2.48959 13.75 3.73958 13.75 5.25C13.75 6.76042 13.3203 8.01041 12.4609 9H16.875C16.875 8.47916 17.0573 8.03646 17.4219 7.67188C17.7865 7.30729 18.2292 7.125 18.75 7.125ZM2.5 5.25C2.5 6.08334 2.91666 6.5 3.75 6.5C4.58334 6.5 5 6.08334 5 5.25C5 4.41666 4.58334 4 3.75 4C2.91666 4 2.5 4.41666 2.5 5.25ZM16.25 6.5C15.4167 6.5 15 6.08334 15 5.25C15 4.41666 15.4167 4 16.25 4C17.0833 4 17.5 4.41666 17.5 5.25C17.5 6.08334 17.0833 6.5 16.25 6.5ZM10.8984 5.83594C10.8464 5.78385 10.7682 5.73177 10.6641 5.67969C10.638 5.65365 10.5859 5.63411 10.5078 5.62109C10.4297 5.60807 10.3776 5.60156 10.3516 5.60156V6.8125H10.4688L10.5078 6.77344L10.8203 6.61719C10.8724 6.59115 10.9245 6.52604 10.9766 6.42188C11.0026 6.36979 11.0156 6.29167 11.0156 6.1875C11.0156 6.03125 10.9766 5.91406 10.8984 5.83594ZM9.21875 3.96094C9.24479 3.90885 9.3099 3.85677 9.41406 3.80469C9.51823 3.7526 9.59635 3.72656 9.64844 3.72656V4.74219C9.51823 4.71615 9.40104 4.65104 9.29688 4.54688C9.19271 4.44271 9.14062 4.33854 9.14062 4.23438C9.14062 4.15625 9.16667 4.0651 9.21875 3.96094ZM0 11.5V12.75H20V11.5H0Z"/>
+                            </svg>
+                            <span>Package</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- Shapes  -->
+                <span class="flex items-center justify-center absolute top-7 -right-14">
+                    <svg width="127" height="127" viewBox="0 0 127 127" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M90.371 36.475L79.0579 97.2867L29.5604 47.7892L90.371 36.475Z" fill="#FFE05D"/>
+                        </g>
+                        <defs>
+                        <filter id="filter0_d" x="0.560387" y="0.726793" width="125.56" height="125.56" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dx="-9" dy="9"/>
+                        <feGaussianBlur stdDeviation="10"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.124075 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                        </filter>
+                        </defs>
+                    </svg>
+                    <button x-show="sidebar" @click="sidebar = false" class="absolute pl-2 -mt-1 text-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </span>
+                <span class="absolute -bottom-11 -left-5">
+                    <svg width="97" height="109" viewBox="0 0 97 109" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d)">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M61.0306 36.4682L49.7175 97.2799L0.22004 47.7824L61.0306 36.4682Z" fill="#FE7429"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d" x="-28.78" y="0.719971" width="125.56" height="125.56" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dx="-9" dy="9"/>
+                    <feGaussianBlur stdDeviation="10"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.124075 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                    </filter>
+                    </defs>
+                    </svg>
+                </span>
+            </div>
+            <div class="relative flex flex-col w-full space-y-10 pt-14 lg:pt-10 lg:pl-16 font-source-sans-pro">
+                <div class="flex flex-row items-center justify-center md:justify-between">
+                    <h1 class="text-black text-2xl font-bold lg:font-normal lg:text-3xl">Hello Super Admin!</h1>
+                    <div class="hidden md:flex items-center space-x-3">
+                        <div class="flex items-center justify-center w-16 h-16 rounded-full bg-white border border-purple">
+                            <h1 class="text-purple font-bold text-3xl">SA</h1>
+                        </div>
+                        <div class="flex flex-col space-y-1">
+                            <p class="text-xl">Superadmin@gmail.com!</p>
+                            <a href="#" class="text-sm text-purple">Log out</a>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-black text-xl font-bold lg:font-normal lg:text-2xl">Create New Assessments </h1>
+                <div class="relative grid grid-cols-12 gap-5 items-center max-w-3xl">
+                    <div class="col-span-12 pt-3">
+                        <div>
+                            <label for="start_date_time" class="label pl-5 block text-sm">
+                                Select Questions <span class="text-lg text-pink">*</span>
+                            </label>
+                            <div class="relative mt-1.5">
+                                <div class="mt-1.5">
+                                    <input @click="SelectQuestionModal = true"  type="text" name="topic_name" id="topic_name" placeholder="Select Questions" class="block w-full text-sm text-black placeholder-black placeholder-opacity-50 py-2.5 px-5 rounded-lg border-white focus:border-purple focus:ring-0">
+                                </div>
+                                <svg class="absolute text-black text-opacity-50 right-2.5 top-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-6">
+                        <div>
+                            <label for="end_date_time" class="label required pl-5 block text-sm">
+                                Topic name <span class="text-lg text-pink">*</span>
+                            </label>
+                            <div class="mt-1.5">
+                                <input type="text" name="topic_name" id="topic_name" placeholder="Class Diagrams" class="block w-full text-sm text-black placeholder-black placeholder-opacity-50 py-2.5 px-5 rounded-lg border-white focus:border-purple focus:ring-0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-6">
+                        <div>
+                            <label for="module" class="label required pl-5 block text-sm">
+                                Select the  module <span class="text-lg text-pink">*</span>
+                            </label>
+                            <div class="mt-1.5">
+                                <select id="module" name="module" class="block w-full text-sm text-black placeholder-black placeholder-opacity-50 text-opacity-50 py-2.5 px-5 rounded-lg border-white focus:border-purple focus:ring-0">
+                                    <option>Software Development Life Cycle</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12">
+                        <div>
+                            <label for="type" class="label required pl-5 block text-sm">
+                                Description <span class="text-lg text-pink">*</span>
+                            </label>
+                            <div class="mt-1.5">
+                                <textarea name="question" id="question" cols="10" rows="6" placeholder="Question text will be here for user Lorem Ipsum is simply… " class="block w-full text-sm text-black placeholder-black placeholder-opacity-50 text-opacity-50 py-2.5 px-5 rounded-lg border-white focus:border-purple focus:ring-0"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-12 lg:col-span-6 pt-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center justify-center rounded-md mx-1 py-3 bg-mist text-oslo-grey w-1/2 text-sm font-bold uppercase">back</div>
+                            <div class="flex items-center justify-center rounded-md mx-1 py-3 bg-purple text-white w-1/2 text-sm font-bold uppercase">save</div>
+                        </div>
+                    </div>
+                    
+                    <span class="absolute right-2 lg:-right-32 -top-24 lg:-top-7">
+                        <svg width="116" height="116" viewBox="0 0 116 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path opacity="0.289109" fill-rule="evenodd" clip-rule="evenodd" d="M2 73.0062L42.9952 114L98.9937 98.9961L114 42.9953L73.0048 2L17.0063 17.0039L2 73.0062ZM42.4594 116L0 73.5436L0.106044 73.1404L15.5406 15.5421L15.9424 15.4331L73.5406 0L116 42.4608L115.894 42.8626L100.459 100.459L100.058 100.568L42.4594 116Z" fill="#36A7F8"/>
+                        </svg>
+                    </span>
+                </div>
+                <span class="hidden 2xl:inline absolute top-12 -right-5">
+                    <svg width="261" height="261" viewBox="0 0 261 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M95.533 261L226.033 226.033L261 95.533L165.467 0L34.967 34.967L0 165.464L95.533 261Z" fill="#E4F4FF"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <img class="absolute z-0 bottom-0 left-24" src="./assets/images/bottom_lines.png" alt="">
+        <!-- Select Question Modal  -->
+        <div x-show="SelectQuestionModal" class="fixed z-50 px-4 md:px-0 flex items-center justify-center bg-cadet-grey bg-opacity-60 inset-0 w-full h-full overflow-hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="bg-white bg-opacity-100 max-w-3xl w-full rounded-xl shadow-2xl py-3 px-4 md:px-7">
+                <div class="flex flex-col md:flex-row md:items-center justify-between py-3">
+                    <span class="order-2 md:order-1 text-sm font-bold text-black text-opacity-70 pt-2 md:pt-0">Select Questions</span>
+                    <div class="order-1 md:order-2 flex items-cetnter space-x-3">
+                        <div class="mt-1 w-72 relative rounded-lg py-0 border border-mist">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.25 0C2.3505 0 0 2.3505 0 5.25C0 8.1495 2.3505 10.5 5.25 10.5C6.52 10.5 7.684 10.0495 8.592 9.299L12.1465 12.854C12.2403 12.9478 12.3675 13.0004 12.5002 13.0004C12.6328 13.0003 12.76 12.9476 12.8538 12.8538C12.9475 12.7599 13.0001 12.6327 13.0001 12.5001C13.0001 12.3674 12.9473 12.2403 12.8535 12.1465L9.299 8.5915C10.0769 7.65187 10.5017 6.46983 10.5 5.25C10.5 2.3505 8.1495 0 5.25 0ZM1 5.25C1 4.12283 1.44777 3.04183 2.2448 2.2448C3.04183 1.44777 4.12283 1 5.25 1C6.37717 1 7.45817 1.44777 8.2552 2.2448C9.05223 3.04183 9.5 4.12283 9.5 5.25C9.5 6.37717 9.05223 7.45817 8.2552 8.2552C7.45817 9.05223 6.37717 9.5 5.25 9.5C4.12283 9.5 3.04183 9.05223 2.2448 8.2552C1.44777 7.45817 1 6.37717 1 5.25Z" fill="black"/>
+                                </svg>
+                            </div>
+                            <input type="text" name="search" id="search" placeholder="Search Question" class="block w-full rounded-lg text-sm text-black placeholder-black placeholder-opacity-70 pl-9 px-5 border-0 focus:ring-0">
+                        </div>
+                        <button @click="SelectQuestionModal = false" class="focus:outline-none pt-1">
+                            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 2.5C12.5277 2.5 10.111 3.23311 8.05538 4.60663C5.99976 5.98015 4.39761 7.93238 3.45151 10.2165C2.50542 12.5005 2.25787 15.0139 2.74019 17.4386C3.2225 19.8634 4.41301 22.0907 6.16117 23.8388C7.90933 25.587 10.1366 26.7775 12.5614 27.2598C14.9861 27.7421 17.4995 27.4946 19.7836 26.5485C22.0676 25.6024 24.0199 24.0002 25.3934 21.9446C26.7669 19.889 27.5 17.4723 27.5 15C27.5 13.3585 27.1767 11.733 26.5485 10.2165C25.9203 8.69989 24.9996 7.3219 23.8388 6.16117C22.6781 5.00043 21.3001 4.07969 19.7836 3.45151C18.267 2.82332 16.6415 2.5 15 2.5ZM18.3875 16.6125C18.5047 16.7287 18.5977 16.867 18.6611 17.0193C18.7246 17.1716 18.7573 17.335 18.7573 17.5C18.7573 17.665 18.7246 17.8284 18.6611 17.9807C18.5977 18.133 18.5047 18.2713 18.3875 18.3875C18.2713 18.5047 18.1331 18.5977 17.9807 18.6611C17.8284 18.7246 17.665 18.7572 17.5 18.7572C17.335 18.7572 17.1716 18.7246 17.0193 18.6611C16.867 18.5977 16.7287 18.5047 16.6125 18.3875L15 16.7625L13.3875 18.3875C13.2713 18.5047 13.1331 18.5977 12.9807 18.6611C12.8284 18.7246 12.665 18.7572 12.5 18.7572C12.335 18.7572 12.1716 18.7246 12.0193 18.6611C11.867 18.5977 11.7287 18.5047 11.6125 18.3875C11.4953 18.2713 11.4024 18.133 11.3389 17.9807C11.2754 17.8284 11.2428 17.665 11.2428 17.5C11.2428 17.335 11.2754 17.1716 11.3389 17.0193C11.4024 16.867 11.4953 16.7287 11.6125 16.6125L13.2375 15L11.6125 13.3875C11.3771 13.1521 11.2449 12.8329 11.2449 12.5C11.2449 12.1671 11.3771 11.8479 11.6125 11.6125C11.8479 11.3771 12.1671 11.2449 12.5 11.2449C12.8329 11.2449 13.1521 11.3771 13.3875 11.6125L15 13.2375L16.6125 11.6125C16.8479 11.3771 17.1671 11.2449 17.5 11.2449C17.8329 11.2449 18.1521 11.3771 18.3875 11.6125C18.6229 11.8479 18.7551 12.1671 18.7551 12.5C18.7551 12.8329 18.6229 13.1521 18.3875 13.3875L16.7625 15L18.3875 16.6125Z" fill="#0A0B09"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative flex items-center justify-between w-full border-b pr-5">
+                    <label class="text-sm font-medium text-black text-opacity-70 w-full py-3">
+                        Question
+                    </label>
+                    <label class="text-sm font-medium text-black text-opacity-70 w-full py-3">
+                        Difficulty
+                    </label>
+                    <label class="text-sm font-medium text-black text-opacity-70 w-full py-3">
+                        Module
+                    </label>
+                    <div class="flex items-center">
+                        <span class="opacity-0 h-5 w-5"></span>
+                    </div>
+                </div>
+                <fieldset class="flex flex-col w-full h-96 overflow-y-auto">
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q1" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Know your purpose.
+                        </label>
+                        <label for="q1" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q1" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q1" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q2" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Open conversation.
+                        </label>
+                        <label for="q2" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Medium
+                        </label>
+                        <label for="q2" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q2" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q3" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Speak your listener’s language. 
+                        </label>
+                        <label for="q3" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Hard
+                        </label>
+                        <label for="q3" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q3" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q4" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Know your purpose.
+                        </label>
+                        <label for="q4" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q4" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q4" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q5" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Open conversation.
+                        </label>
+                        <label for="q5" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q5" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q5" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q6" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Speak your listener’s language. 
+                        </label>
+                        <label for="q6" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Medium
+                        </label>
+                        <label for="q6" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q6" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q7" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Know your purpose.
+                        </label>
+                        <label for="q7" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q7" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q7" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q8" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Open conversation.
+                        </label>
+                        <label for="q8" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q8" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q8" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q9" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Speak your listener’s language. 
+                        </label>
+                        <label for="q9" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Hard
+                        </label>
+                        <label for="q9" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q9" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q10" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Know your purpose.
+                        </label>
+                        <label for="q10" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q10" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q10" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q11" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Open conversation.
+                        </label>
+                        <label for="q11" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q11" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q11" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q12" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Speak your listener’s language. 
+                        </label>
+                        <label for="q12" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q12" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q12" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q13" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Know your purpose.
+                        </label>
+                        <label for="q13" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q13" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q13" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q14" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Open conversation.
+                        </label>
+                        <label for="q14" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q14" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q14" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-between w-full border-b ">
+                        <label for="q15" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Speak your listener’s language. 
+                        </label>
+                        <label for="q15" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            Easy
+                        </label>
+                        <label for="q15" class="text-xs md:text-sm text-black text-opacity-50 w-full py-3">
+                            SDLC
+                        </label>
+                        <div class="flex items-center">
+                            <input id="q15" name="options" type="checkbox" class="focus:ring-0 h-5 w-5 rounded-full text-green focus:text-green focus:border-green border-transparent">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>  
+    </div>
+    <script src="./js/alpine.js"></script>
+</body>
+</html>
