@@ -1,0 +1,9 @@
+{
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/create-new-question.html"
+    }
+  ]
+}
